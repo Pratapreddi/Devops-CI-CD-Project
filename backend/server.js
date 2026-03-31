@@ -1,24 +1,22 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
 
 const app = express();
-app.use(cors());
 app.use(express.json());
 
-mongoose.connect("mongodb://mongo:27017/tasks");
+mongoose.connect("mongodb://mongo:27017/notes");
 
-const Task = mongoose.model("Task", { name: String });
+const Note = mongoose.model("Note", { text: String });
 
-app.get("/tasks", async (req, res) => {
-  const tasks = await Task.find();
-  res.json(tasks);
+app.get("/notes", async (req, res) => {
+  const notes = await Note.find();
+  res.json(notes);
 });
 
-app.post("/tasks", async (req, res) => {
-  const task = new Task({ name: req.body.name });
-  await task.save();
-  res.json(task);
+app.post("/notes", async (req, res) => {
+  const note = new Note({ text: req.body.text });
+  await note.save();
+  res.json(note);
 });
 
 app.listen(5000, () => console.log("Backend running"));
