@@ -1,0 +1,19 @@
+services:
+  frontend:
+    build: ./frontend
+
+  backend:
+    build: ./backend
+
+  mongo:
+    image: mongo
+
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - frontend
+      - backend

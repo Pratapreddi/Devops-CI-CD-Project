@@ -21,9 +21,4 @@ app.post("/tasks", async (req, res) => {
   res.json(task);
 });
 
-app.delete("/tasks/:id", async (req, res) => {
-  await Task.findByIdAndDelete(req.params.id);
-  res.send("Deleted");
-});
-
 app.listen(5000, () => console.log("Backend running"));
